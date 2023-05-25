@@ -1,0 +1,18 @@
+<article
+    (click)="controls && openAlbum()"
+    [ngClass]="{'clickable highlight': controls}"
+>
+    <img *ngIf="album.image; else defaultImage"
+         [src]="album.image"
+         [alt]="album.title"
+    >
+    <ng-template #defaultImage>
+        <img src="assets/logo.svg" alt="Application logo" class="img-logo">
+    </ng-template>
+
+    <footer>
+        <strong [textContent]="album.title"></strong><br>
+        <p [textContent]="album.artist?.username ?? 'Unknown'"></p>
+        <small [textContent]="album.dateCreated | date:'MMMM d, y'"></small>
+    </footer>
+</article>

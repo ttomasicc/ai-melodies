@@ -1,0 +1,11 @@
+spring:
+  # Turn of caching
+  cache:
+    type: none
+
+  # Static resource directory (Docker volume)
+  web:
+    resources:
+      # Be careful with directory permissions
+      # static-locations: file:/var/lib/docker/volumes/spring-data/_data/
+      static-locations: file:/tmp/spring-test/

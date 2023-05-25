@@ -1,0 +1,762 @@
+{
+	"info": {
+		"_postman_id": "7ae5f2e1-3907-4137-ba14-c90fcf8b788f",
+		"name": "AI Melodije API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16324555"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Jwt",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register - ARTIST",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"luna\",\n    \"email\": \"luna.thyy42@gmail.com\",\n    \"password\": \"abc?=j0sN3Pr0b0Jn!j4L0z1nk4a!#!\",\n    \"firstName\": \"Luna\",\n    \"lastName\": \"Thy\",\n    \"bio\": \"Kratak opis divne cure s AI mjeseca.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login - ARTIST",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"luna\",\n    \"password\": \"abc?=j0sN3Pr0b0Jn!j4L0z1nk4a!#!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login - ADMINISTRATOR",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"soundwalk\",\n    \"password\": \"n3Pr0b0JnAL0z1nk4a!!!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Current Artist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/current",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"current"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Artists",
+			"item": [
+				{
+					"name": "Find artist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/artists/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update artist",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "tin.tomasic74@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "firstName",
+									"value": "Timmy",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "lastName",
+									"value": "Toma",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "bio",
+									"value": "Kombinirajući znanje o muzičkoj i informacijskoj teoriji, stvorio sam vlastiti stil komponiranja glazbe koristeći AI algoritme. Moja je glazba često opisana kao futuristička i avangardna, a publika i kritičari su iznenađeni kako AI može stvoriti tako živopisne i emotivne melodije.\n\nZahvaljujući svom radu, dobio sam priznanja i izvedbe širom svijeta, a moja se glazba sada koristi u različitim kontekstima - od filmske glazbe do videoigara i virtualnih događaja. Nastavljam stvarati i istraživati, upijajući utjecaje različitih žanrova i kultura u svoj rad, uvijek tražeći nove načine da spojim tehnologiju i emociju u glazbi.",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/artists/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Genres",
+			"item": [
+				{
+					"name": "Find all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/genres",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add genre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"retro-funk\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/genres",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update genre",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"retro-funk-reggae\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/genres/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"genres",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete genre",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/genres/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"genres",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete unused",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/genres",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"genres"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Albums",
+			"item": [
+				{
+					"name": "Find all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find album",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add album",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Futura II\",\n    \"description\": \"Neviđeno do sad. Mega ekstra ne-ordinarna glazba. All by meself (and AI).\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update album",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Avangarda 3. dio",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "Neviđeno do sad. Mega ekstra ne-ordinarna glazba. All by me (and AI). EDIT: Dodane su još tri melodije s novog Google MusicLM platforme - uživajte, pozz!",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete album",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Melodies",
+			"item": [
+				{
+					"name": "Find all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums/1/melodies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums",
+								"1",
+								"melodies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find melody",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums/1/melodies/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums",
+								"1",
+								"melodies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add melody",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "genreId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "name",
+									"value": "Čarobna tehno šuma",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums/1/melodies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums",
+								"1",
+								"melodies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update melody",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Čarobna tehnološka AI šumica\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums/1/melodies/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums",
+								"1",
+								"melodies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete melody",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/artists/1/albums/1/melodies/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"artists",
+								"1",
+								"albums",
+								"1",
+								"melodies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Info",
+			"item": [
+				{
+					"name": "New stuff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/info/new?resourceType=melody",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"info",
+								"new"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "15",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "resourceType",
+									"value": "melody"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/info/search?title=a&resourceType=melody",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"info",
+								"search"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "a"
+								},
+								{
+									"key": "size",
+									"value": "15",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "resourceType",
+									"value": "melody"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const jwtUrl = pm.collectionVariables.get(\"base_url\") + \"/auth/token\";",
+					"",
+					"pm.sendRequest({",
+					"    url: jwtUrl,",
+					"    method: 'GET',",
+					"    header: {",
+					"        'Content-type': 'application/json'",
+					"    }",
+					"}, (err, res) => {",
+					"    console.log(res.json().token);",
+					"    pm.collectionVariables.set(\"jwt\", res.json().token);",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:8080/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "jwt",
+			"value": "null",
+			"type": "string"
+		}
+	]
+}

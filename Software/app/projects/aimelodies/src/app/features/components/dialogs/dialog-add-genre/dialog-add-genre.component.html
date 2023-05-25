@@ -1,0 +1,40 @@
+<dialog [open]="dialogOpen">
+    <article>
+        <header>
+            Add new genre
+            <a
+                (click)="closeDialog()"
+                href="#closeForm"
+                aria-label="Close"
+                class="close"
+            ></a>
+        </header>
+        <form action="/" method="post" [formGroup]="genreFormGroup" (ngSubmit)="addGenre()">
+            <label for="name">
+                Genre name
+                <input id="name"
+                       type="text"
+                       placeholder="Name"
+                       [attr.aria-invalid]="isNotValid('name') === false ? '' : 'true'"
+                       formControlName="name"
+                       minlength="1"
+                       maxlength="50"
+                       required>
+            </label>
+            <label
+                *ngIf="isNotValid('name')"
+                class="error"
+                [textContent]="'Genre name cannot be empty.'"
+            ></label>
+
+            <button
+                type="submit"
+                [disabled]="genreFormGroup.invalid"
+                [textContent]="'Save'"
+            ></button>
+        </form>
+        <p class="error" *ngIf="errorMessage">
+            {{errorMessage}}
+        </p>
+    </article>
+</dialog>

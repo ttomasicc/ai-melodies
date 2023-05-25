@@ -1,0 +1,64 @@
+<dialog [open]="dialogOpen">
+    <article>
+        <header>
+            Add new melody
+            <a
+                (click)="closeDialog()"
+                href="#closeForm"
+                aria-label="Close"
+                class="close"
+            ></a>
+        </header>
+
+        <form action="/" method="post" [formGroup]="melodyFormGroup" (ngSubmit)="addMelody()">
+            <label for="name">
+                Melody name
+                <input id="name"
+                       type="text"
+                       placeholder="Name"
+                       [attr.aria-invalid]="isNotValid('name') === false ? '' : 'true'"
+                       formControlName="name"
+                       minlength="1"
+                       maxlength="100"
+                       required>
+            </label>
+            <label
+                *ngIf="isNotValid('name')"
+                class="error"
+                [textContent]="'Melody name cannot be empty.'"
+            ></label>
+
+            <label for="genre">Genres</label>
+            <select id="genre" formControlName="genreId" required>
+                <option [ngValue]="null" disabled>Choose genre</option>
+                <option *ngFor="let genre of allGenres" [ngValue]="genre.id">
+                    {{ genre.name }}
+                </option>
+            </select>
+
+            <label for="audio">
+                Audio file
+                <input id="audio"
+                       type="file"
+                       [attr.aria-invalid]="isNotValid('audio') === false ? '' : 'true'"
+                       (change)="onFileChange($event)"
+                       required>
+            </label>
+            <label
+                *ngIf="isNotValid('audio')"
+                class="error"
+                [textContent]="'Audio cannot be empty.'"
+            ></label>
+
+            <button
+                type="submit"
+                [disabled]="melodyFormGroup.invalid"
+                [attr.aria-busy]="saveButtonPressed"
+                [textContent]="'Save'"
+            ></button>
+        </form>
+        <p class="error" *ngIf="errorMessage">
+            {{errorMessage}}
+        </p>
+    </article>
+</dialog>

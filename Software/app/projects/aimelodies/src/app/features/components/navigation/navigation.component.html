@@ -1,0 +1,30 @@
+<nav class="container-fluid">
+    <ul>
+        <li>
+            <a routerLink="/home">
+                <strong>AI MELODIES</strong>
+                <img
+                    src="assets/logo.svg"
+                    alt="Application Logo"
+                    width="32"
+                />
+            </a>
+        </li>
+    </ul>
+    <ul>
+        <li *ngIf="currentArtist === undefined"><a routerLink="/register">Register</a></li>
+        <li *ngIf="currentArtist === undefined"><a routerLink="/login" role="button">Log in</a></li>
+
+        <li *ngIf="currentArtist !== undefined">
+            <details role="list" dir="rtl" (click)="clickDetails($event)" [open]="detailsOpen">
+                <summary aria-haspopup="listbox" role="button" class="outline">
+                    {{currentArtist.username}}
+                </summary>
+                <ul role="listbox">
+                    <li><a (click)="profile()">Profile</a></li>
+                    <li><a (click)="logout()">Log out</a></li>
+                </ul>
+            </details>
+        </li>
+    </ul>
+</nav>

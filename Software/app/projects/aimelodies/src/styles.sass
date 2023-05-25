@@ -1,0 +1,53 @@
+$error-color: #B71C1C
+
+$grid-columns: 5
+$column-gap: 50px
+$breakpoints: ("1500px": 4, "1300px": 3, "700px": 2, "500px": 1)
+
+@mixin responsive-grid
+    display: grid
+    grid-template-columns: repeat($grid-columns, 1fr)
+    grid-column-gap: $column-gap
+
+    @each $breakpoint, $columns in $breakpoints
+        @media only screen and (max-width: $breakpoint)
+            grid-template-columns: repeat($columns, 1fr)
+
+
+@mixin zoom-animation($duration, $scale)
+    @keyframes zoom
+        from
+            transform: scale(1)
+        to
+            transform: scale($scale)
+
+    animation-name: zoom
+    animation-duration: $duration
+    animation-timing-function: ease-in-out
+    animation-fill-mode: both
+
+.highlight:hover
+    @include zoom-animation(0.2s, 1.01)
+    border-color: var(--primary-focus)
+
+table[role="grid"] tbody tr:hover
+    background-color: var(--primary-focus) !important
+
+.grid-container
+    @include responsive-grid
+
+.error
+    color: $error-color
+
+a.error[role=button]
+    background-color: $error-color
+    border-color: $error-color
+
+.clickable:hover
+    cursor: pointer
+
+// fix pico css arrow color
+
+details
+    @media only screen and (prefers-color-scheme: light)
+        --icon-chevron-button: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(0, 0, 0)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")

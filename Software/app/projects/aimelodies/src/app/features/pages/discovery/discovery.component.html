@@ -1,0 +1,125 @@
+<h1>Discover New Music</h1>
+
+<div class="btn-radio">
+    <button
+        type="button"
+        (click)="searchResource = ResourceType.ALBUM"
+        [ngClass]="searchResource === ResourceType.ALBUM ? 'primary' : 'outline'"
+    >{{ResourceType.ALBUM}}</button>
+    <button
+        type="button"
+        (click)="searchResource = ResourceType.MELODY"
+        [ngClass]="searchResource === ResourceType.MELODY ? 'primary' : 'outline'"
+    >{{ResourceType.MELODY}}</button>
+</div>
+
+<div class="search">
+    <input
+        type="search"
+        [ngModel]="searchTerm"
+        (input)="search($event)"
+        [placeholder]="searchPlaceholder"
+    />
+
+    <svg
+        *ngIf="searchTerm"
+        (click)="clearSearch()"
+        xmlns="http://www.w3.org/2000/svg"
+        width="32" height="32"
+        fill="currentColor"
+        viewBox="0 0 16 16">
+        <path
+            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+    </svg>
+</div>
+
+<div class="pagination">
+    <button (click)="first()"
+            [disabled]="!currentPage.number"
+            type="button"
+    >&laquo;
+    </button>
+    <button (click)="previous()"
+            [disabled]="!currentPage.number"
+            type="button"
+    >&lt;
+    </button>
+
+    <button type="button">{{currentPage.number + 1}}</button>
+
+    <button (click)="next()"
+            [disabled]="!currentPage.totalPages || currentPage.number === currentPage.totalPages - 1"
+            type="button"
+    >&gt;
+    </button>
+    <button (click)="last()"
+            [disabled]="!currentPage.totalPages || currentPage.number === currentPage.totalPages - 1"
+            type="button"
+    >&raquo;
+    </button>
+</div>
+
+<h3 *ngIf="message">{{message}}</h3>
+<article *ngIf="loadingResults" aria-busy="true"></article>
+
+<div *ngIf="!loadingResults" class="grid-container">
+    <app-album
+        *ngFor="let album of albums"
+        [album]="album"
+        [controls]="true"
+    ></app-album>
+</div>
+
+<table *ngIf="melodies.length &&!loadingResults" role="grid">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Artist</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Date published</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+        *ngFor="let melody of melodies"
+        (click)="navigateToAlbum(melody._links.album.href)"
+        class="clickable"
+    >
+        <td><strong>{{melody.name}}</strong></td>
+        <td *ngIf="melody.artist">
+            <span
+                (click)="navigateToArtist(melody.artist._links.self.href, $event)"
+                class="artist"
+            >{{melody.artist.username}}</span>
+        </td>
+        <td>{{melody.genre.name}}</td>
+        <td>{{melody.dateCreated | date:'MMMM d, y'}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<div *ngIf="(albums.length >= 5 || melodies.length >= 10) && !loadingResults" class="pagination">
+    <button (click)="first()"
+            [disabled]="!currentPage.number"
+            type="button"
+    >&laquo;
+    </button>
+    <button (click)="previous()"
+            [disabled]="!currentPage.number"
+            type="button"
+    >&lt;
+    </button>
+
+    <button type="button">{{currentPage.number + 1}}</button>
+
+    <button (click)="next()"
+            [disabled]="!currentPage.totalPages || currentPage.number === currentPage.totalPages - 1"
+            type="button"
+    >&gt;
+    </button>
+    <button (click)="last()"
+            [disabled]="!currentPage.totalPages || currentPage.number === currentPage.totalPages - 1"
+            type="button"
+    >&raquo;
+    </button>
+</div>

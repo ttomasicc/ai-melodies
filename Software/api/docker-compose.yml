@@ -1,0 +1,50 @@
+version: "3.9"
+
+networks:
+  default:
+    name: "ai-melodies-api"
+
+volumes:
+  spring_vol:
+    name: spring-data
+  postgres_vol:
+    name: postgres-data
+  redis_vol:
+    name: redis-data
+
+services:
+  api:
+    container_name: spring-api
+    image: "ttomasic/ai-melodies-api:latest"
+    user: root
+    ports:
+      - "8080:8080"
+    volumes:
+      - "spring_vol:/data"
+    environment:
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/melodies"
+      - "SPRING_DATA_REDIS_HOST=redis"
+      - "SPRING_WEB_RESOURCES_STATICLOCATIONS=file:/data/"
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    container_name: postgres-db
+    image: "postgres:15-alpine"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "postgres_vol:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_USER=admin"
+      - "POSTGRES_PASSWORD=admin"
+      - "POSTGRES_DB=melodies"
+
+  redis:
+    container_name: redis-db
+    image: "redis:7-alpine"
+    ports:
+      - "6379:6379"
+    volumes:
+      - "redis_vol:/data"

@@ -1,0 +1,63 @@
+spring:
+  # Redis caching
+  cache:
+    type: redis
+
+  # Redis configuration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  # PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5432/melodies
+    username: admin
+    password: admin
+
+  # JPA
+  jpa:
+    open-in-view: false
+    show-sql: true
+
+  # API request size limit
+  servlet:
+    multipart:
+      max-file-size: 4MB
+      max-request-size: 5MB
+
+  # Session configuration
+  session:
+    timeout: 30m
+
+  # Exposing public static resources to /static
+  mvc:
+    static-path-pattern: /static/**
+
+  # Static resource directory (Docker volume)
+  web:
+    resources:
+      # Be careful with directory permissions
+      # static-locations: file:/var/lib/docker/volumes/spring-data/_data/
+      static-locations: file:/tmp/spring-data/
+
+app:
+  # Jwt settings
+  jwt:
+    secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    duration: 5s
+    issuer: https://github.com/ttomasicc
+
+  # Spotify API settings
+  spotify:
+    base-url: https://api.spotify.com/v1
+    client-id: 
+    client-secret: 
+
+server:
+  error:
+    include-message: always
+
+logging:
+  level:
+    org.springframework.security: error

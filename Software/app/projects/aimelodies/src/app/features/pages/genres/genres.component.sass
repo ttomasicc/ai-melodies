@@ -1,0 +1,30 @@
+h1 + div.controls
+    margin-bottom: 25px
+
+    a:last-child
+        float: right
+
+.search
+    position: relative
+
+    input
+        padding-right: 50px
+
+    svg
+        position: absolute
+        top: 50%
+        transform: translateY(-80%)
+        right: 15px
+
+table
+    display: inline-block
+
+table tbody tr td:last-child a
+    visibility: hidden
+
+table tbody tr:hover td:last-child a
+    visibility: visible
+
+table tbody td:last-child a.error
+    margin-left: 20px
+    float: right

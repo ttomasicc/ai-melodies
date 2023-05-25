@@ -1,0 +1,89 @@
+<h1>Manage Genres</h1>
+
+<div class="controls">
+    <a
+        (click)="openAddGenreDialog()"
+        role="button"
+        href="#addGenre"
+        class="primary"
+    >Add genre</a>
+    <a
+        (click)="openWarningDialog()"
+        role="button"
+        href="#removeUnused"
+        class="error"
+    >Remove unused</a>
+</div>
+
+<app-dialog-warning
+    [open]="warningDialogOpen"
+    title="Delete unused genres"
+    message="Are you sure you want to delete all unused genres?"
+    (confirm)="deleteUnusedGenres()"
+    (cancel)="closeWarningDialog()"
+></app-dialog-warning>
+
+<app-dialog-add-genre
+    [open]="addGenreDialogOpen"
+    [path]="allGenresResponse?._links?.self?.href ?? ''"
+    (success)="insertGenre($event)"
+    (close)="closeAddGenreDialog()"
+></app-dialog-add-genre>
+
+<div class="search">
+    <input
+        type="search"
+        [(ngModel)]="searchTerm"
+        placeholder="Search genres..."
+    />
+
+    <svg
+        *ngIf="searchTerm"
+        (click)="clearSearch()"
+        xmlns="http://www.w3.org/2000/svg"
+        width="32" height="32"
+        fill="currentColor"
+        viewBox="0 0 16 16">
+        <path
+            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+    </svg>
+</div>
+
+<table *ngIf="allGenres.length; else emptyGenres" role="grid">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let genre of (allGenres | search:searchTerm:'name')">
+        <td><strong>{{genre.id}}</strong></td>
+        <td>{{genre.name}}</td>
+        <td>
+            <a (click)="openUpdateGenreDialog(genre)" href="#updateGenre">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M4 21a1 1 0 0 0 .24 0l4-1a1 1 0 0 0 .47-.26L21 7.41a2 2 0 0 0 0-2.82L19.42 3a2 2 0 0 0-2.83 0L4.3 15.29a1.06 1.06 0 0 0-.27.47l-1 4A1 1 0 0 0 3.76 21 1 1 0 0 0 4 21zM18 4.41 19.59 6 18 7.59 16.42 6zM5.91 16.51 15 7.41 16.59 9l-9.1 9.1-2.11.52z"/>
+                </svg>
+            </a>
+            <a (click)="deleteGenre(genre)" href="#deleteGenre" class="error">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"/>
+                    <path d="M9 10h2v8H9zm4 0h2v8h-2z"/>
+                </svg>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<ng-template #emptyGenres>There are currently no genres available.</ng-template>
+
+<app-dialog-update-genre
+    [open]="updateGenreDialogOpen"
+    [value]="updateGenreObject"
+    (success)="updateGenre($event)"
+    (close)="closeUpdateGenreDialog()"
+></app-dialog-update-genre>

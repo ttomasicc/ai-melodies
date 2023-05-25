@@ -1,0 +1,43 @@
+<h1>New albums</h1>
+
+<div class="grid-container">
+    <app-album
+        *ngFor="let album of latestAlbums"
+        [album]="album"
+        [controls]="currentArtist !== undefined"
+    ></app-album>
+</div>
+
+<br><br>
+
+<h1>New melodies</h1>
+
+<table role="grid">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Artist</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Date published</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+        *ngFor="let melody of latestMelodies"
+        (click)="currentArtist && navigateToAlbum(melody._links.album.href)"
+        [ngClass]="{'clickable': currentArtist}"
+    >
+        <td><strong>{{melody.name}}</strong></td>
+        <td *ngIf="melody.artist">
+            <span
+                (click)="currentArtist && navigateToArtist(melody.artist._links.self!!.href, $event)"
+                class="artist"
+            >{{melody.artist.username}}</span>
+        </td>
+        <td>{{melody.genre.name}}</td>
+        <td>{{melody.duration | secondsToTime}}</td>
+        <td>{{melody.dateCreated | date:'MMMM d, y'}}</td>
+    </tr>
+    </tbody>
+</table>

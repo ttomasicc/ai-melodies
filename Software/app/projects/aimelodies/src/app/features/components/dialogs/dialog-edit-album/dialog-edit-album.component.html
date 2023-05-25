@@ -1,0 +1,54 @@
+<dialog [open]="dialogOpen">
+    <article>
+        <header>
+            Edit album details
+            <a
+                (click)="closeDialog()"
+                href="#closeForm"
+                aria-label="Close"
+                class="close"
+            ></a>
+        </header>
+
+        <form action="/" method="post" [formGroup]="albumFormGroup" (ngSubmit)="updateAlbum()">
+            <label for="title">
+                Title
+                <input id="title"
+                       type="text"
+                       placeholder="Title"
+                       [attr.aria-invalid]="isNotValid('title') === false ? '' : 'true'"
+                       formControlName="title"
+                       maxlength="100">
+            </label>
+
+            <label for="description">
+                Description
+                <textarea id="description"
+                          placeholder="Description"
+                          cols="70" rows="7"
+                          [attr.aria-invalid]="isNotValid('description') === false ? '' : 'true'"
+                          formControlName="description"
+                ></textarea>
+            </label>
+
+            <label for="image">
+                Image upload
+                <input id="image"
+                       type="file"
+                       [attr.aria-invalid]="isNotValid('image') === false ? '' : 'true'"
+                       (change)="onFileChange($event)"
+                >
+            </label>
+
+            <button
+                type="submit"
+                [disabled]="albumFormGroup.invalid"
+                [attr.aria-busy]="saveButtonPressed"
+                [textContent]="'Update'"
+            ></button>
+        </form>
+        <p class="error" *ngIf="errorMessage">
+            {{errorMessage}}
+        </p>
+    </article>
+</dialog>
